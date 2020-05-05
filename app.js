@@ -41,5 +41,5 @@ app.use('/products/:db/:category',product.display);
 
 mongoConnect(() => {
 
-    app.listen(3001);
+    app.listen(3000);
 })
