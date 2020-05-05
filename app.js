@@ -41,5 +41,5 @@ app.use('/products/:db/:category',product.display);
 
 mongoConnect(() => {
 
-    app.listen(3000);
+    app.listen(3000,()=> console.log("Local host"));
 })
