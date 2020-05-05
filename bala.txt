@@ -1,0 +1,3 @@
+name : bala
+password : 123 
+email : bala@gmail.com
