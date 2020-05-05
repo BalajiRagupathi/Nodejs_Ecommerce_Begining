@@ -1,0 +1,213 @@
+<%- include('includes/head.ejs') %>
+<style>
+  .table-wrapper {
+position:relative;
+}
+.table-scroll {
+height:270px;
+overflow:auto;  
+margin-top:20px;
+}
+.table-wrapper table {
+width:100%;
+}
+.table-wrapper table * {
+background:#6dabe4;
+color:black;
+}
+.table-wrapper table thead th .text {
+position:absolute;   
+top:-20px;
+z-index:2;
+height:20px;
+width:35%;
+border:1px solid red;
+}
+
+.myInput {
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 0px 12px 0px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+.myTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+}
+
+.myTable th, #myTable td {
+  text-align: left;
+  padding: 12px;
+}
+
+.myTable tr {
+  border-bottom: 1px solid #ddd;
+}
+
+.myTable tr.header, #myTable tr:hover {
+  background-color: #f1f1f1;
+}
+</style>
+</head>
+<body>
+
+    <h1><%= subTitle %> Admin DashBoard</h1>
+    
+    <h2>New Category</h2>
+    <form action="/admin/kids-add-products" method="POST">
+      Main category : <input type="text" name="maincategory">
+      Sub category : <input type="text" name="topcategory">
+      <br>
+      <br>
+        <div id="dynamicInput">
+              Key 0 : <input type="text" name="key0">
+              value 0 : <input type="text" name="val0"><br><br>
+        </div>
+        <br><input type="button" value="Add another text input" onClick="addInput('dynamicInput');">
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- <% if( cards.length > 0 ) { %>
+      <h1>Add Card</h1>
+      <% for( let key of cards ) { %>
+        
+          <% for (let temp in key ) { %>
+            <% if( temp != "_id" ) { let flag = 0; %>
+            <h1><%= temp %></h1>
+            <% for( let i = 0 ; flag == 0 ; i++) { let card = key[temp+""][i] %>
+            
+            <% if( card != null ){ %>
+            <form action="/admin/man-already-add-products/<%= key._id %>" method="POST">
+              
+                Category : <input type="text" name="<%= temp %>" value="<%= temp %>"><br><br>
+                <% for(let val in  card ) { flag = 1; %>
+                      <%= val %> : <input type="text" name="<%= val %>" /><br><br>
+                  <% }  %>  
+                
+                    <button type="submit">Add Card</button> <% } %>
+
+            </form>
+              <% } %>
+            <% } %>
+        <% } %>
+      <% } %><% } %> -->
+        <!-- <form action="/admin/add-products" method="POST">
+            <input type="text" name="category" placeholder="category">
+            <input type="text" name="title" placeholder="title">
+            <input type="text" name="price" placeholder="price">
+            <input type="text" name="desc" placeholder="desc">
+            <button type="submit">Add Card</button>
+        </form> -->
+
+        
+    <h1>Add Slides</h1>
+        <form action="/admin/kids-add-slides" method="POST">
+          <input type="text" name="img" placeholder="Image address">
+          <input type="text" name="cap" placeholder="Caption">
+          <button type="submit">Add Slides</button>
+        </form>
+
+        <div class="table-wrapper">
+          <div class="table-scroll">
+            <table>
+              <tr>
+                <th>Id</th>
+                <th>Caption</th>
+                <th>Delete</th>
+              </tr>
+              <% for( let val of slides ) { %>
+                <tr>
+                  <td><%= val.id %></td>
+                  <td><%= val.caption %></td>
+                  <td><a href="/admin/kids-delete-slides/<%= val._id %>">Delete</a></td>
+                </tr>
+              <% } %>
+            </table>
+          </div>
+        </div>
+    
+      <h1>View Products</h1>
+      <% let flag = 0; if( cards.length > 0 ) { %>
+        <% for( let key of cards ) { %>
+            <% for (let temp in key ) { %>
+              <% if( temp != "_id"&& temp != 'main' ) {%>
+                <h1> <%= temp %> <a href="/admin/kids-deleteproduct/<%= key._id %>">Delete</a></h1>
+                <% tflag = 0; for( let i = 0 ; tflag == 0 ; i++) { let card = key[temp+""][i] %>
+            
+                  <% if( card != null ){ %>
+                  <form action="/admin/kids-already-add-products/<%= key._id %>" method="POST">
+                    
+                      Category : <input type="text" name="<%= temp %>" value="<%= temp %>"><br><br>
+                      <% for(let val in  card ) { tflag = 1; %>
+                            <%= val %> : <input type="text" name="<%= val %>" /><br><br>
+                        <% }  %>  
+                      
+                          <button type="submit">Add Card</button> <% } %>
+
+                  </form>
+                    <% } %>
+                    <input type="text" class="myInput" id="<%= temp %>0" onkeyup="myFunction('<%= temp %>0','<%= temp %>1')" placeholder="Search for title" title="Type in a name">
+                <div class="table-wrapper">
+                  <div class="table-scroll">
+                <table id="<%= temp %>1">
+                  <tr>
+                    <% let rflag = 0; for( let i = 0 ; rflag == 0 ; i++) { let card = key[temp+""][i] %>
+                      <% if( card != null ){ %>
+                          <% for(let val in  card ) { rflag = 1; %>
+                                <th><%= val %></th>
+                            <% }  %>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                    <% } } %>
+                  </tr>
+                <% for( let i = 0 ; i < key[temp+""].length ; i++) { let card = key[temp+""][i]%>
+                <% if( card != null ) { %>
+                      
+                  <tr>
+                          <% for(let val in  card ) { flag = 1; %>
+                              
+                                  <td><p><%=card[val+""]%></td>
+                              
+                          <% } %>
+                        <td><a href="/admin/kids-editproduct/<%= key._id %>/<%= temp %>/<%= i %>">Edit </a></td>
+                        <td><a href="/admin/kids-removeproduct/<%= key._id %>/<%= temp %>/<%= i %>">Delete </a></td>
+                      </tr>
+                    <% } %>
+                          <% } %>
+                  <% } %>  
+                
+                    </table></div></div>
+                <% } %>
+              <% } if( flag == 0 ) { %> <h1> No Products </h1> <% }%>
+          <% } else{ %>
+              <h1> No Products </h1>
+            <% } %>
+    <script src="../js/dynamicfield.js" ></script>
+    <script>
+      function myFunction(inp,tab) {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById(inp+"");
+        filter = input.value.toUpperCase();
+        table = document.getElementById(tab+"");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[0];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }       
+        }
+      }
+      </script>
+</body>
+</html>

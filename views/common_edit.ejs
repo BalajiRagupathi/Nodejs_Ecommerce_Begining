@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= docTitle %></title>
+    <link rel="stylesheet" href="../../fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+</head>
+<body>
+    
+    <form action="/admin/common-update/<%= catId %>/<%= cat %>/<%= prodId %>" method="POST">
+        Main category <input type="text" name="main" value="<%= main %>"><br>
+        Sub category <input type="text" name="category" value="<%= cat %>"><br>
+        <% for(let val in product ) { %>
+            <%= val %>: <input type="text" name="<%= val %>" value="<%= product[val] %>"><br>
+        <% } %>
+        <button type="submit">Submit</button>
+    </form>
+    <script src="../../js/dynamicfield.js" ></script>
+</body>
+</html>

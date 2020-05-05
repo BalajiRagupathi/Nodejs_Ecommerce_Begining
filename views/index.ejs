@@ -1,0 +1,126 @@
+
+<%- include('includes/head.ejs') %>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    
+  <%- include('includes/navigation.ejs') %>
+      <div style="margin-top:130px;">
+        <div class="slideshow-container">
+
+          <% for( let i = 0 ; i < slides.length ; i++ ) { %>
+            <div class="mySlides fade">
+              <div class="numbertext"> <%= i+1 %> / <%= slides.length %></div>
+              <img src="<%= slides[i].img %>" style="width:1220px;height: 540px">
+              <div class="text"><%= slides[i].caption %></div>
+            </div>
+          <% } %>
+          
+          <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+          <a class="next" onclick="plusSlides(1)">&#10095;</a>
+          
+          </div>
+          <br>
+          
+          <div style="text-align:center">
+            <% for( let i = 0 ; i < slides.length ; i++ ) { %>
+              <span class="dot" onclick="currentSlide( '<%= i+1 %>' )"></span> 
+            <% } %>
+          </div>
+          
+      </div>
+      
+      <div class="header">
+        <h1>Women</h1>
+      </div>
+      
+      <div class="row">
+      <!-- https://www.dhresource.com/0x0/f2/albu/g7/M01/AD/F3/rBVaSVuPdcSAEqEUAAfNlAeD0Yc748.jpg -->
+        <div class="col-2">
+          <img src="https://www.dhresource.com/0x0/f2/albu/g7/M01/AD/F3/rBVaSVuPdcSAEqEUAAfNlAeD0Yc748.jpg " width="100%" height="300">
+          <h3 style="text-align: center;" >Clothes</h3>
+        </div>
+        <div class="col-2">
+          <img src="https://previews.123rf.com/images/jemastock/jemastock1711/jemastock171101056/88943284-women-fashion-accessories-icon-vector-illustration-graphic-design.jpg" width="100%" height="300">
+          <h3 style="text-align: center;" >Accessories</h3>
+        </div>
+        <div class="col-2">
+          <img src="https://previews.123rf.com/images/ktanya/ktanya1804/ktanya180400004/99085932-set-of-icons-of-women-s-shoes-vector-illustration.jpg" width="100%" height="300">
+          <h3 style="text-align: center;" >Footwear</h3>
+        </div>
+        <div class="col-2">
+          <img src="https://www.aroundthecloud.org/wp-content/uploads/sites/www.aroundthecloud.org/images/2019/11/event-featured-Pru-1574197168.png" width="100%" height="300">
+          <h3 style="text-align: center;" >Personal Cares</h3>
+        </div>
+      </div>
+      <div class="header">
+        <h1>Men</h1>
+      </div>
+      
+      <div class="row">
+      
+        <div class="col-2">
+          <img src="https://ae01.alicdn.com/kf/HTB1dYB2XMHqK1RjSZFPq6AwapXa5.jpg" width="100%" height="300">
+          <h3 style="text-align: center;" >Clothes</h3>
+        </div>
+        <div class="col-2">
+          <img src="https://s2sshopping.com/wp-content/uploads/2013/06/f5.jpg" width="100%" height="300">
+          <h3 style="text-align: center;" >Accessories</h3>
+        </div>
+        <div class="col-2">
+          <img src="https://previews.123rf.com/images/nafanya1710/nafanya17101905/nafanya1710190501157/122749213-vector-background-with-men-s-shoes-vector-illustration-for-your-design.jpg" width="100%" height="300">
+          <h3 style="text-align: center;" >Footwear</h3>
+        </div>
+        <div class="col-2">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRmWOngbGQ5JimF6jGn8hQQbWOduFPBgVnwHMt27H4FFpZOuzVn&usqp=CAU" width="98%" height="300">
+          <h3 style="text-align: center;" >Personal Cares</h3>
+        </div>   
+      </div>
+      <div class="header">
+        <h1>Kids</h1>
+      </div>
+      
+      <div class="row">
+      
+        <div class="col-2">
+          <img src="https://www.w3schools.com/howto/img_avatar2.png" width="100%" height="300">
+          <h3 style="text-align: center;" ><a href="/products/kids_admin/clothes" >Clothes</a></h3>
+        </div>
+        <div class="col-2">
+          <img src="https://www.w3schools.com/howto/img_avatar2.png" width="100%" height="300">
+          <h3 style="text-align: center;" ><a href="/products/kids_admin/clothes" >Footwear</a></h3>
+        </div>
+        <div class="col-2">
+          <img src="https://www.w3schools.com/howto/img_avatar2.png" width="100%" height="300">
+          <h3 style="text-align: center;" ><a href="/products/kids_admin/clothes" >Personal Cares</a></h3>
+        </div>
+        <div class="col-2">
+          <img src="https://www.w3schools.com/howto/img_avatar2.png" width="100%" height="300">
+          <h3 style="text-align: center;" ><a href="/products/kids_admin/clothes" >Toys</a></h3>
+        </div>   
+      </div>
+      <div class="header">
+        <h1>Common</h1>
+      </div>
+      
+      <div class="row">
+      
+        <div class="col-2">
+          <img src="https://www.w3schools.com/howto/img_avatar2.png" width="100%" height="300">
+          <h3 style="text-align: center;" >Home Things</h3>
+        </div>
+        <div class="col-2">
+          <img src="https://www.w3schools.com/howto/img_avatar2.png" width="100%" height="300">
+          <h3 style="text-align: center;" >Accessories</h3>
+        </div>
+        <div class="col-2">
+          <img src="https://www.w3schools.com/howto/img_avatar2.png" width="100%" height="300">
+          <h3 style="text-align: center;" >Books</h3>
+        </div>
+        <div class="col-2">
+          <img src="https://www.w3schools.com/howto/img_avatar2.png" width="100%" height="300">
+          <h3 style="text-align: center;" >Media / Gamings</h3>
+        </div>  
+      </div>
+      <script src="js/slide.js"></script>
+  <%- include('includes/end.ejs') %>
