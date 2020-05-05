@@ -1,5 +1,6 @@
 const exp = require("express");
 const path = require("path");
+const serverless = require('serverless-http');
 const body = require("body-parser");
 const app = exp();
 const adminRouter = require("./routes/admin");
@@ -41,5 +42,8 @@ app.use('/products/:db/:category',product.display);
 
 mongoConnect(() => {
 
+    app.use('/.netlify/functions/server', router);  // path must route to lambda
     app.listen("vigorous-keller-581492.netlify.app");
 })
+module.exports = app;
+module.exports.handler = serverless(app);
