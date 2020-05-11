@@ -22,7 +22,7 @@ app.use(body.urlencoded({extended: true}));
 
 app.use('/admin',adminRouter);
 app.use('/user',userRouter);
-app.use('/home',homePage.errorpage);
+app.use('/',homePage.errorpage);
 app.use('/products/:db/:category',product.display);
 // app.use('/', (req,res,next) => res.status(301).redirect(301,"/home"));
 
