@@ -1,4 +1,5 @@
 const exp = require("express");
+const http = require('http');
 const path = require("path");
 const body = require("body-parser");
 const app = exp();
@@ -14,6 +15,7 @@ app.set("views" , "views");
 
 app.use(exp.static(path.join(__dirname,"public")));
 app.use(body.urlencoded({extended: true}));
+app.use(http.createServer());
 
 // db.execute('SELECT * FROM products')
 // .then(result => {
