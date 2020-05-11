@@ -7,6 +7,7 @@ const userRouter = require("./routes/user");
 const product = require("./controller/productcontroller");
 const homePage = require("./controller/home");
 const mongoConnect = require('./utils/database').mongoConnect;
+const port = process.env.PORT || 3000;
 
 app.set("view engin" , "ejs");
 app.set("views" , "views");
@@ -41,5 +42,5 @@ app.use('/products/:db/:category',product.display);
 
 mongoConnect(() => {
 
-    app.listen(3000,()=> console.log("Local host"));
+    app.listen(port,()=> console.log("Local host"));
 })
