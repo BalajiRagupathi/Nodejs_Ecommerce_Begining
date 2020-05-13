@@ -9,13 +9,13 @@ const product = require("./controller/productcontroller");
 const homePage = require("./controller/home");
 const mongoConnect = require('./utils/database').mongoConnect;
 const port = process.env.PORT || 3000;
+const serverless = require("serverless-http");
 
 app.set("view engin" , "ejs");
 app.set("views" , "views");
 
 app.use(exp.static(path.join(__dirname,"public")));
 app.use(body.urlencoded({extended: true}));
-app.use(http.createServer());
 
 // db.execute('SELECT * FROM products')
 // .then(result => {
@@ -23,10 +23,10 @@ app.use(http.createServer());
 // })
 // .catch(err => console.log(err));
 
-app.use('/admin',adminRouter);
-app.use('/user',userRouter);
-app.use('/',homePage.errorpage);
-app.use('/products/:db/:category',product.display);
+app.use('/.netlify/functions/api/admin',adminRouter);
+app.use('/.netlify/functions/api/user',userRouter);
+app.use('/.netlify/functions/api/',homePage.errorpage);
+app.use('/.netlify/functions/api/products/:db/:category',product.display);
 // app.use('/', (req,res,next) => res.status(301).redirect(301,"/home"));
 
 // sequelize
@@ -44,5 +44,10 @@ app.use('/products/:db/:category',product.display);
 
 mongoConnect(() => {
 
-    app.listen(port,()=> console.log("Local host"));
+    console.log("Connected");
+//     app.listen(port,()=> console.log("Local host"));
 })
+
+
+module.exports = app;
+module.exports.handler = serverless(app);
