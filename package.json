@@ -4,7 +4,7 @@
   "description": "Bit Shop",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "NODE_ENV=development ./node_modules/.bin/netlify-lambda serve app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Balaji S R",
