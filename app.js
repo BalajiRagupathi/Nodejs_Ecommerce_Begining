@@ -1,5 +1,6 @@
 const exp = require("express");
-const http = require('http');
+const fs = require("fs");
+const https = require('https');
 const path = require("path");
 const body = require("body-parser");
 const app = exp();
@@ -9,13 +10,17 @@ const product = require("./controller/productcontroller");
 const homePage = require("./controller/home");
 const mongoConnect = require('./utils/database').mongoConnect;
 const serverless = require("serverless-http");
+const helmet = require("helmet");
 
 app.set("view engin" , "ejs");
 app.set("views" , "views");
 
+// const privakeKey = fs.readFileSync("server.key");
+// const certificate = fs.readFileSync("server.cert");
+
 app.use(exp.static(path.join(__dirname,"public")));
 app.use(body.urlencoded({extended: true}));
-
+app.use(helmet());
 // db.execute('SELECT * FROM products')
 // .then(result => {
 //     console.log(result);
@@ -44,9 +49,6 @@ app.use('/.netlify/functions/api/products/:db/:category',product.display);
 mongoConnect(() => {
 
     console.log("Connected");
-    app.listen(process.env.PORT || 3000);
+//     https.createServer( { key:privakeKey , cert: certificate } , app)
+        app.listen(process.env.PORT || 3000);
 })
-
-
-module.exports = app;
-module.exports.handler = serverless(app);
