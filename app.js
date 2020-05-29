@@ -8,7 +8,6 @@ const userRouter = require("./routes/user");
 const product = require("./controller/productcontroller");
 const homePage = require("./controller/home");
 const mongoConnect = require('./utils/database').mongoConnect;
-const port = process.env.PORT || 3000;
 const serverless = require("serverless-http");
 
 app.set("view engin" , "ejs");
@@ -45,7 +44,7 @@ app.use('/.netlify/functions/api/products/:db/:category',product.display);
 mongoConnect(() => {
 
     console.log("Connected");
-//     app.listen(port,()=> console.log("Local host"));
+    app.listen(process.env.PORT || 3000);
 })
 
 
